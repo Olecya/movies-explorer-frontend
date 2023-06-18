@@ -1,0 +1,97 @@
+.register {
+    padding: 70px 0;
+    margin: 0 auto;
+    max-width: 396px;
+}
+
+.register__link {
+    margin: 0;
+    padding: 0;
+    max-width: 38px;
+    min-height: 38px;
+    cursor: pointer;
+}
+
+
+
+.register__title {
+    margin: 40px 0;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.register__but {
+    padding: 0;
+    margin: 70px 0 16px;
+    /*margin: 179px 0 16px; для окна войти */
+    width: 100%;
+    min-height: 45px;
+    background: #4285F4;
+    border-radius: 3px;
+    border: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.register__but:disabled {
+    background-color: #8b8b8b;
+    cursor: auto;
+}
+
+.register__text {
+    color: #8B8B8B;
+    margin: 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+}
+
+.register__text-link {
+    margin-left: 6px;
+    color: #4285F4;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .register {
+        padding: 232px 0;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .register {
+        padding: 56px 0 30px;
+    }
+
+    .register__link {
+        max-width: 320px;
+        text-align: center;
+    }
+
+    .register__title {
+        margin: 50px 0 80px;
+        text-align: center;
+    }
+
+    .register__form {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+
+    .register__but {
+        margin: 157px 0 14px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .register__text {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

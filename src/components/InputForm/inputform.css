@@ -1,0 +1,46 @@
+.register__form-label {
+    margin: 6px 0 10px 0;
+    max-width: 100%;
+    display: block;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #8B8B8B;
+
+}
+
+
+.register__form-input {
+    padding: 0 0 0 15px;
+    margin: 0 0 10px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 46px;
+    background: #2F2F2F;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+
+.register__form-input_color {
+    color: #EE3465;
+}
+
+.register__form-input_error {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.register__form-input_error_active {
+    visibility: visible;
+    opacity: 1;
+}

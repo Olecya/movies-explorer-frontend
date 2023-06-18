@@ -1,0 +1,126 @@
+.profile {
+    padding: 75px 0 69px;
+    margin: 0 auto;
+    max-width: 410px;
+    width: 100%;
+}
+
+.profile-title {
+    margin: 0 auto 123px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.profile__form {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 410px;
+}
+
+.profile__form-label {
+    position:relative;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 25px;
+    color: #FFFFFF;
+    width: 410px;
+    border-bottom: 1px solid #424242;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile__form-label:last-child {
+    border-bottom: none;
+}
+
+.profile__form-input {
+    text-align: right;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.profile__but-edit {
+    width: 100%;
+    margin: 0 auto 16px;
+    padding: 0;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    border: none;
+    background-color: transparent;
+    color: #FFFFFF;;
+}
+
+.profile__but-exit {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    border: none;
+    background-color: transparent;
+    color: #EE3465;
+}
+
+.profile__but-box {
+    max-width: 410px;
+    margin: 0 auto;
+    padding: 220px 0 0;
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        padding: 236px 0 269px;
+    }
+
+    .profile-title {
+        margin: 0 auto 96px;
+    }
+
+    .profile__but-box {
+        max-width: 410px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .profile {
+        padding: 70px 0 40px;
+    }
+
+    .profile-title {
+        margin: 0 auto 80px;
+    }
+
+    .profile__form-label {
+        width: 260px;
+    }
+
+    .profile__but-box {
+        max-width: 300px;
+    }
+
+    .profile__form {
+        max-width: 260px;
+    }
+
+    .profile__but-exit {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .profile__but-edit {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
