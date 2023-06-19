@@ -1,7 +1,7 @@
 # movies-explorer-frontend
 
 Адрес репозитория Frontend: https://github.com/Olecya/movies-explorer-frontend
-Макет дипломного проекта: https://disk.yandex.ru/client/disk/Загрузки/Figma%20design
+Макет дипломного проекта: https://disk.yandex.ru/d/Ckbg0tUsuiX1eA
 
 ## Ссылки на проект
 
