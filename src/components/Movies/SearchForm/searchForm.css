@@ -1,96 +1,103 @@
 .searchForm {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 60px 0 0;
-    box-sizing: border-box;
-    border-bottom: 1px solid #424242;
-    background: #202020;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 60px 0 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #424242;
+  background: #202020;
 }
 
 .searchForm__form {
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    z-index: 1;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.searchForm__input {
+  width: 100%;
+  height: 46px;
+  padding: 0 0 0 20px;
+  border: none;
+  border-radius: 40px;
+  background: #2F2F2F;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 17px;
+  box-sizing: border-box;
+  color: #8B8B8B;
+}
+
+.searchForm__but-search {
+  padding: 0;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 58.65px;
+  height: 34px;
+  border: none;
+  background: #414449;
+  border-radius: 48px;  
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.searchForm__but-search_activ {
+  background: #4285F4;
+  cursor: pointer;
+}
+
+.searchForm__filterCheckbox {
+  display: flex;
+  margin: 41px auto 69px;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchForm__button {
+  padding: 0;
+  margin: 0 12px 0 0;
+  background-image: url(../../../images/smalltumb.svg);
+  width: 36px;
+  height: 20px;
+  background-position: inherit;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.searchForm__button_activ {
+  background-image: url(../../../images/smalltumb_grey.svg);
+}
+
+.searchForm__filterCheckbox-text {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .searchForm {
+    padding: 80px 0 0;
+    margin: 0 30px;
   }
 
   .searchForm__input {
-    width: 100%;
-    height: 46px;
-    padding: 0 0 0 20px;
-    border: none;
-    border-radius: 40px;
-    background: #2F2F2F;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 17px;
-    box-sizing: border-box;
-    color: #8B8B8B;
+    max-width: 708px;
   }
-  .searchForm__but-search {
-    padding: 0;
-    position: absolute; 
-    top: 6px;
-    right: 6px;
-    width: 58.65px;
-    height: 34px;
-    border: none;
-    background: #4285F4;
-    border-radius: 48px;
-    cursor: pointer;
-    color: #FFFFFF;
-    font-weight: 500;
-    font-size: 11px;
-    line-height: 18px;
+}
+
+@media screen and (max-width: 320px) {
+  .searchForm {
+    margin: 0 14px;
   }
 
-  .searchForm__filterCheckbox {
-    display: flex;
-    margin: 41px auto 69px;
-    justify-content: center;
-    align-items: center;
+  .searchForm__input {
+    max-width: 292px;
   }
-
-  .searchForm__button {
-    padding: 0;
-    margin: 0 12px 0 0;
-    background-image: url(../../../images/smalltumb.svg);
-    width: 36px;
-    height: 20px;
-    background-position: inherit;
-    background-repeat: no-repeat;
-    border: none;
-    background-color: transparent;
-    background-size: cover;
-    cursor: pointer;
-  }
-
-  .searchForm__button_activ {
-    background-image: url(../../../images/smalltumb_grey.svg);
-  }
-
-  .searchForm__filterCheckbox-text {
-    margin: 0;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-  }
-
-  @media screen and (max-width: 768px)  {
-    .searchForm {
-      padding: 80px 0 0;
-      margin: 0 30px;
-    }
-    .searchForm__input {
-      max-width: 708px;
-    }
-  }
-  
-  @media screen and (max-width: 320px)  {
-    .searchForm {
-      margin: 0 14px;
-    }
-    .searchForm__input {
-      max-width: 292px;
-    }
-  }
+}
