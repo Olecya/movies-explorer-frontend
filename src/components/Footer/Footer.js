@@ -1,9 +1,7 @@
 import React from 'react';
-import { useLocation } from 'react-router';
 import './footer.css';
 
-export default function Footer() {
-  let location = useLocation();
+export default function Footer({ location }) {
 
   const showFooter = () => {
     switch (location.pathname) {

@@ -6,7 +6,7 @@ import { MoviesCardList } from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 import { SearchForm } from "./SearchForm/SearchForm";
 // import { countFilmList } from "../../utils/constants";
-export const SavedMovies = ({ loading, movies = [] }) => {
+export const SavedMovies = ({ loading, movies = [], location }) => {
 
     const [filmList, setFilmList] = useState(3);
 
@@ -15,7 +15,7 @@ export const SavedMovies = ({ loading, movies = [] }) => {
             <SearchForm />
             {loading ? <Preloader /> :
                 <>
-                    <MoviesCardList>
+                    <MoviesCardList location={location}>
                         {
                             movies.slice(0, filmList).map(m => (
                                 <MoviesCard key={m._id || m.id} movie={m} savedMovies={true} />

@@ -1,10 +1,10 @@
 import React from 'react';
-import { useLocation } from 'react-router';
+
 import Navigation from '../Navigation/Navigation';
 import './header.css';
 
-export const Header = ({ loggedIn }) => {
-    let location = useLocation();
+export const Header = ({ loggedIn, location }) => {
+    
 
     let showNavigation = () => {
         switch (location.pathname) {

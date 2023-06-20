@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './searchForm.css';
 
 export const SearchForm = () => {
-    const [word, setWord] = useState('');
+    const [word, setWord] = useState('Ok');
     const [filterCheckbox, setFilterCheckbox] = useState(false);
 // /(^[a-z]{2,}$\b)|([\u0401\u0451\u0410-\u044f]$\b)/i;
     const handleChange = (e) => {

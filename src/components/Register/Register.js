@@ -1,12 +1,10 @@
 import React from 'react';
-import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { InputForm } from '../InputForm/InputForm';
 import NavigationLogo from '../NavigationLogo/NavigationLogo';
 import './register.css';
 
-export const Register = () => {
-    let location = useLocation();
+export const Register = ({location}) => {    
 
     const locationSignUp = () => {
         return location.pathname === `/sign-up`;

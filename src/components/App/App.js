@@ -1,7 +1,8 @@
 import './App.css';
 import React, { useState, useEffect, useCallback } from 'react';
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
 // import ProtectedRouteElement from "./ProtectedRoute";
+// import { useLocation } from 'react-router';
 import Footer from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import { Main } from '../Main/Main';
@@ -25,6 +26,7 @@ function App() {
     // const [loggedIn, setLoggedIn] = useState(false);
     const [loading, setLoading] = useState(false);
     const [movies, setMovies] = useState([]);
+    let location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -58,20 +60,20 @@ function App() {
 
     return (
         <>
-            <Header loggedIn={loggedIn} />
+            <Header loggedIn={loggedIn} location={location} />
             <Routes>
                 <Route path={`/`} element={<Main loggedIn={loggedIn} />} />
-                <Route path={`/movies`} element={<Movies loading={loading} movies={movies} />} />
+                <Route path={`/movies`} element={<Movies loading={loading} movies={movies} location={location} />} />
                 <Route path={`/saved-movies`} element={
-                    <SavedMovies loading={loading} movies={movies} />
+                    <SavedMovies loading={loading} movies={movies} location={location} />
                 } />
                 <Route path={`/profile`} element={<Profile userOut={handleUserOut} />} />
-                <Route path={`/sign-in`} element={<Register />} />
-                <Route path={`/sign-up`} element={<Register />} />
+                <Route path={`/sign-in`} element={<Register location={location}  />} />
+                <Route path={`/sign-up`} element={<Register location={location} />} />
                 <Route path={`/not-found-page`} element={<NotFoundPage />} />
                 <Route path='*' element={<Navigate to={`/not-found-page`} replace />} />
             </Routes>
-            <Footer />
+            <Footer location={location}/>
         </>
     );
 }
