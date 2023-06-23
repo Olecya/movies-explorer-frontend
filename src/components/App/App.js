@@ -13,17 +13,9 @@ import api from '../../utils/Api';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 import { Register } from '../Register/Register';
 
-// Для проверки работы предлогается сначала посмотреть 
-// версию для уже зарегистрированнного пользователя.
-// Для проверки главной страницы с навигацинным баром 
-// гостевого режима предлогается перейти на роут "/profile"
-// и нажать кнопку выйти.
-// Так же для удобства проверки можно включать и выключать
-// строки 23 и 24 отвечающие за логирование.
-
 function App() {
     const [loggedIn, setLoggedIn] = useState(true);
-    // const [loggedIn, setLoggedIn] = useState(false);
+    const [getMoviesSubmit, setGetMoviesSubmit] = useState(false);
     const [loading, setLoading] = useState(false);
     const [movies, setMovies] = useState([]);
     let location = useLocation();
@@ -40,16 +32,19 @@ function App() {
             setLoading(true);
             const resposne = await api.getMovies();
             setMovies(resposne);
+            // console.log(resposne[0]);
         } catch (err) {
             console.log(err);
         } finally {
             setLoading(false);
+            setGetMoviesSubmit(false)
         }
     }, []);
 
     useEffect(() => {
-        loggedIn && getMovies();
-    }, [loggedIn]);
+        // console.log('getMoviesSubmit');
+        getMoviesSubmit && loggedIn && getMovies();
+    }, [loggedIn, getMoviesSubmit]);
 
     function handleUserOut() {
         setLoggedIn(false);
@@ -63,17 +58,19 @@ function App() {
             <Header loggedIn={loggedIn} location={location} />
             <Routes>
                 <Route path={`/`} element={<Main loggedIn={loggedIn} />} />
-                <Route path={`/movies`} element={<Movies loading={loading} movies={movies} location={location} />} />
+                <Route path={`/movies`} element={
+                    <Movies loading={loading} movies={movies} location={location} onSubmit={() => setGetMoviesSubmit(true)} />
+                } />
                 <Route path={`/saved-movies`} element={
-                    <SavedMovies loading={loading} movies={movies} location={location} />
+                    <SavedMovies loading={loading} movies={movies} location={location} onSubmit={() => setGetMoviesSubmit(true)} />
                 } />
                 <Route path={`/profile`} element={<Profile userOut={handleUserOut} />} />
-                <Route path={`/sign-in`} element={<Register location={location}  />} />
+                <Route path={`/sign-in`} element={<Register location={location} />} />
                 <Route path={`/sign-up`} element={<Register location={location} />} />
                 <Route path={`/not-found-page`} element={<NotFoundPage />} />
                 <Route path='*' element={<Navigate to={`/not-found-page`} replace />} />
             </Routes>
-            <Footer location={location}/>
+            <Footer location={location} />
         </>
     );
 }

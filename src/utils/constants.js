@@ -8,4 +8,4 @@ export const apiMovieOptions =
     }
 }
 
-export const countFilmList = 16;
+export const countFilmList = 4;

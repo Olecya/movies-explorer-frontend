@@ -6,13 +6,13 @@ import { MoviesCardList } from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 import { SearchForm } from "./SearchForm/SearchForm";
 // import { countFilmList } from "../../utils/constants";
-export const SavedMovies = ({ loading, movies = [], location }) => {
+export const SavedMovies = ({ loading, movies = [], location, onSubmit }) => {
 
     const [filmList, setFilmList] = useState(3);
 
     return (
         < >
-            <SearchForm />
+            <SearchForm onSubmit={onSubmit} />
             {loading ? <Preloader /> :
                 <>
                     <MoviesCardList location={location}>
