@@ -1,0 +1,133 @@
+.aboutProject {
+    padding: 110px 0 0;
+    margin: 0 auto;
+    max-width: 1280px;
+    background-color: rgba(39, 39, 39, 1);
+}
+
+.aboutProject__container {
+    display: flex;
+    margin: 70px 70px 110px;
+    justify-content: center;
+}
+
+.aboutProject__subtitle {
+    margin: 0 0 26px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+}
+
+.aboutProject__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 auto;
+}
+
+.aboutProject__container-flex {
+    margin: 0 40px 0 0;
+    max-width: 550px;
+    width: 100%;
+}
+
+.aboutProject__container-flex:last-child {
+    margin: 0;
+}
+
+.aboutProject__chart {
+    display: flex;
+    margin: 0 70px;
+    justify-content: start;
+}
+
+.aboutProject__chart-week {
+    max-width: 228px;
+    width: 100%;
+    min-height: 36px;
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+}
+
+.aboutProject__chart-gray {
+    max-width: 912px;
+    width: 100%;
+    min-height: 36px;
+    background-color: rgba(48, 48, 48, 1);
+    margin: 0;
+    color: rgba(255, 255, 255, 1);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.aboutProject__chart-flex {
+    max-width: 228px;
+    width: 100%;
+    margin: 0;
+}
+
+.aboutProject__chart-green {
+    background-color: rgba(61, 220, 132, 1);
+}
+
+/* .aboutProject__chart-week_green {
+    color: #8B8B8B;
+} */
+
+.aboutProject__chart-week_gray {
+    align-items: center;
+    color: #8B8B8B;
+    display: flex;
+    justify-content: center;
+}
+
+.aboutProject__chart-weeks {
+    max-width: 912px;
+    width: 100%;
+    min-height: 36px;
+    margin: 0;
+    text-align: center;
+ }
+ 
+ @media screen and (max-width: 768px) {
+     .aboutProject {
+         padding: 90px 0 50px;
+     }
+     .aboutProject__container {
+         margin: 70px 50px 93px;
+ }
+ }
+ 
+ @media screen and (max-width: 320px) {
+     .aboutProject {
+         padding: 74px 0;
+     }
+     .aboutProject__container {
+         display: block;
+         margin: 64px 18px;
+ }
+     .aboutProject__subtitle {
+         margin: 0 0 17px;
+         font-size: 18px;
+         line-height: 22px;
+     }
+     .aboutProject__text {
+         font-size: 11px;
+         line-height: 16px;
+     }
+     .aboutProject__container-flex {
+         margin: 0 0 60px;
+     }
+     .aboutProject__chart {
+         margin: 0 18px;
+     }
+ }

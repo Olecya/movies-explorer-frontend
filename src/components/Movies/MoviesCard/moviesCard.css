@@ -1,0 +1,107 @@
+.moviesCard {
+    width: 100%;
+    max-width: 270px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+}
+
+.moviesCard__image {
+    width: 100%;
+    max-width: 300px;
+    object-fit: cover;
+    object-position: center;
+    height: 151px;
+}
+
+.moviesCard__info {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(66, 66, 66, 1);
+}
+
+.moviesCard__title {
+    padding: 0;
+    margin: 14px 0 28px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.moviesCard__like {
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0;
+    margin: 10px 0 0;
+    height: 27px;
+    width: 27px;
+    background-image: url(../../../images/heard_white.png);
+    /* background-image: url(../../images/card_crest.png); */
+    background-color: rgba(49, 49, 49, 1);
+    border-radius: 36px;
+    border: none;
+    cursor: pointer;
+}
+
+.moviesCard__crest {
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0;
+    margin: 10px 0 0;
+    height: 27px;
+    width: 27px;
+    /* background-image: url(../../../images/heard_white.png); */
+    background-image: url(../../../images/card_crest.png);
+    background-color: rgba(49, 49, 49, 1);
+    border-radius: 36px;
+    border: none;
+    cursor: pointer;
+}
+
+.moviesCard__like_aktiv {
+    background-image: url(../../../images/heard_red.png);
+}
+
+.moviesCard__like:hover {
+    opacity: 0.6;
+}
+
+.moviesCard__like_crest {
+    background-image: url(../../../images/card_crest.png);
+}
+
+.moviesCard__time {
+    margin: 6px 0 0;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #8B8B8B;
+}
+
+@media screen and (max-width: 768px)  {
+    .moviesCard {
+    justify-content: center;
+    max-width: 339px;
+    }
+    .moviesCard__image {
+        max-width: 339px;
+        height: 190px;
+    }
+}
+
+@media screen and (max-width: 320px)  {
+    .moviesCard {
+    justify-content: center;
+    max-width: 300px;
+    }
+    .moviesCard__image {
+        max-width: 300px;
+    }
+}

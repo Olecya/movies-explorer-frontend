@@ -1,0 +1,30 @@
+.movieButtonAdd {
+    display: flex;
+    margin: 50px auto 80px;
+    max-width: 1280px;
+}
+
+.movieButtonAdd-still {
+    margin: 0 auto;
+    padding: 0;
+    width: 320px;
+    min-height: 36px;
+    border-radius: 6px;
+    background: #2F2F2F;
+    border: none;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    cursor: pointer;
+}
+
+.movieButtonAdd-still:hover {
+    opacity: 0.6;
+}
+
+ @media screen and (max-width: 320px)  {
+    .movieButtonAdd-still {
+        width: 240px;
+    }    
+}
