@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './searchForm.css';
 
-export const SearchForm = ({ onSubmit, handleSearch }) => {
+export const SearchForm = ({ onSubmit, handleSearch, value }) => {
     const [word, setWord] = useState('');
     const [filterCheckbox, setFilterCheckbox] = useState(false);
 
@@ -27,7 +27,7 @@ export const SearchForm = ({ onSubmit, handleSearch }) => {
         < >
             <section className="searchForm">
                 <form className="searchForm__form">
-                    <input type="text" className="searchForm__input" placeholder="Фильм" required onChange={(e) => { handleChange(e) }} />
+                    <input type="text" className="searchForm__input" defaultValue={value} placeholder="Фильм" required onChange={(e) => { handleChange(e) }} />
                     <button className={`searchForm__but-search ${word && "searchForm__but-search_activ"}`} type="submit" onClick={(e) => handleSubmit(e)} disabled={!Boolean(word)}>Найти</button>
                 </form>
                 <div className="searchForm__filterCheckbox">

@@ -13,72 +13,46 @@ export const Movies = ({ loading, movies = [], location, onSubmit = { onSubmit }
     const [moviesResylt, setMoviesResylt] = useState([]);
     const [searchWord, setSearchWord] = useState('');
 
-    let loadMoviesArr;
-
-    // const handleSubmit = useCallback((w) => {
-
-    // }, []);
-
-    useEffect((w) => {
-        onSubmit();
-        !loading && filteringMovies(loadMoviesArr);
-        loading && setFiltering(true);
-        console.log(movies)
-    }, [loadMoviesArr]);
-
-    async function handleSubmit(w) {
-        setSearchWord(w);
+    useEffect(() => {
         console.log(searchWord);
-        if (!movies?.length) {
-            console.log('23');
-            loadMoviesArr = w;
-            loading && setFiltering(true);
-        } else {
-            console.log('Мы тут   ', !movies?.length);
-            console.log(w)
-
-            // handleSearch(w);
-            filteringMovies(w);
+        if (searchWord) {
+            setFiltering(true);
+            if (!movies?.length) onSubmit();
+            if (movies?.length) filteringMovies(searchWord, movies);
         }
+    }, [searchWord]);
 
-    }
+    useEffect(() => {
+        console.log(loading, searchWord, movies);
+        searchWord && !loading && filteringMovies(searchWord, movies);
+    }, [loading]);
 
-
-    // function handleSearch(w) {
-    //     setSearchWord(w);
-    //     // filteringMovies();
-    // }
-
-    function filteringMovies(w) {
-        // console.log(searchWord);
-        // console.log(movies);
+    const filteringMovies = useCallback((w, mov) => {
+        console.log(w, mov[1]);
 
         async function filterItems(query) {
-
-            let m;
-            if (movies?.length) {
-                m = movies.filter(function (m) {
+            if (mov?.length) {
+                const m = mov.filter(function (m) {
                     return m.nameEN.toLowerCase().indexOf(query.toLowerCase()) > -1 | m.nameRU.toLowerCase().indexOf(query.toLowerCase()) > -1;
                 });
-                // console.log(m);
+                console.log(m);
                 setMoviesResylt(m);
                 setFiltering(false);
             }
         }
         filterItems(w);
-        console.log(searchWord, '   ', moviesResylt);
-    }
+        console.log(w, '   ', moviesResylt);
 
-    // useEffect(() => {
-    //     loading && setFiltering(true);
-    // }, [loading]);
+    }, [searchWord, movies]);
 
     return (
         < >
-            <SearchForm onSubmit={handleSubmit}
+            <SearchForm onSubmit={(w) => setSearchWord(w)} value={searchWord}
             // handleSearch={(e) => handleSearch(e)} 
             />
-            {filtering ? <Preloader /> :
+            {filtering ?
+                <Preloader /> :
+                moviesResylt.length>-1 ?
                 <>
                     <MoviesCardList location={location} >
                         {
@@ -88,7 +62,8 @@ export const Movies = ({ loading, movies = [], location, onSubmit = { onSubmit }
                         }
                     </MoviesCardList>
                     {filmList <= moviesResylt.length && <MovieButtonAdd hendleMovieButtonAdd={() => { setFilmList(filmList + countFilmList) }} />}
-                </>
+                </> :
+                <div>Ничего не найденно</div>
             }
         </>
     )

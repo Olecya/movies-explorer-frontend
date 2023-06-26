@@ -28,14 +28,16 @@ function App() {
     }, []);
 
     const getMovies = useCallback(async () => {
+        let resposne;
         try {
             setLoading(true);
-            const resposne = await api.getMovies();
-            setMovies(resposne);
+            resposne = await api.getMovies();
+            
             // console.log(resposne[0]);
         } catch (err) {
             console.log(err);
-        } finally {
+        } finally {      
+            setMovies(resposne);      
             setLoading(false);
             setGetMoviesSubmit(false)
         }
