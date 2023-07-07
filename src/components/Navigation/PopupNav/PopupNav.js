@@ -14,7 +14,7 @@ function PopupNav({ isOpen, onClose }) {
                     <Link to="/saved-movies" className="popup__link" onClick={onClose}>Сохраненные фильмы</Link>
                 </div>
                 <div className="popup__navigation navigation__account">
-                    <p className="navigation__email">Аккаунт</p>
+                    <Link to='/profile' className="navigation__email" onClick={onClose}>Аккаунт</Link>
                     <Link to='/profile' className="navigation__icon" onClick={onClose}></Link>
                 </div>
             </div>

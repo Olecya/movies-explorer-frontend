@@ -3,7 +3,7 @@ import './inputform.css';
 
 export const InputForm = (props) => {
 
-    const { name, classForm, valueDef, textSpan, textLabel, minLength = 2, maxLength = 40, ...rest } = props;
+    const { name, classForm, valueDef, textSpan, textLabel, minLength = 2, maxLength = 40, valid, ...rest } = props;
 
     return (
         <>
@@ -11,6 +11,7 @@ export const InputForm = (props) => {
             <input
                 className={`${classForm}-input`}
                 id={`popup__${name}`}
+                name={name}
                 type={name}
                 placeholder="&nbsp;"
                 defaultValue={valueDef}
@@ -18,7 +19,8 @@ export const InputForm = (props) => {
                 maxLength={maxLength}
                 {...rest}
             />
-            <span className={`${classForm}-input_error ${classForm}-input_error_active`} id={name}>{textSpan}</span>
+            <span className={`${classForm}-input_error ${valid && `${classForm}-input_error_active`}`} id={name}>{textSpan}</span>
+
         </>
     );
 }

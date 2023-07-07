@@ -1,12 +1,12 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { MovieButtonAdd } from "./MovieButtonAdd/MovieButtonAdd";
 import { MoviesCard } from "./MoviesCard/MoviesCard";
 import { MoviesCardList } from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 import { SearchForm } from "./SearchForm/SearchForm";
 // import { countFilmList } from "../../utils/constants";
-export const SavedMovies = ({ loading, movies = [], location, onSubmit }) => {
+export const SavedMovies = ({ loading, location, onSubmit, myMovies = [], onMovieLike }) => {
 
     const [filmList, setFilmList] = useState(3);
 
@@ -17,8 +17,8 @@ export const SavedMovies = ({ loading, movies = [], location, onSubmit }) => {
                 <>
                     <MoviesCardList location={location}>
                         {
-                            movies.slice(0, filmList).map(m => (
-                                <MoviesCard key={m._id || m.id} movie={m} savedMovies={true} />
+                            myMovies.slice(0, filmList).map(m => (
+                                <MoviesCard key={m._id || m.id} movie={m} onMovieLike={onMovieLike} pathSavedMovies={true} myMovies={myMovies} />
                             ))
                         }
                     </MoviesCardList>

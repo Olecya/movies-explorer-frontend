@@ -1,14 +1,42 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useFormWithValidation } from '../../utils/useFormWithValidation';
 import { InputForm } from '../InputForm/InputForm';
 import NavigationLogo from '../NavigationLogo/NavigationLogo';
 import './register.css';
 
-export const Register = ({location}) => {    
+export const Register = ({ onDataUser, location }) => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [nameUser, setNameUser] = useState('');
+    const validationName = useFormWithValidation(nameUser, "name")
+    // const valid = useFormWithValidation({});
 
     const locationSignUp = () => {
         return location.pathname === `/sign-up`;
     }
+
+    const buttonActiv = () => {
+        return locationSignUp() ? !(email && password && nameUser) : !(email && password);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        onDataUser({
+            password: password,
+            email: email,
+            name: nameUser
+        });
+    }
+
+    const handleChengeForm = useCallback((e) => {
+        setNameUser(e.target.value)
+        // console.log(e.target.name)
+        // onchengeInput(e.value, e.target.name);
+        console.log(validationName.isValid, validationName.messageError)
+        // setNameUser(event.target.value)
+    }, [])
 
     return (
         <section className="register">
@@ -16,28 +44,32 @@ export const Register = ({location}) => {
                 <NavigationLogo />
             </div>
             <h2 className="register__title">{locationSignUp() ? "Добро пожаловать!" : "Рады видеть!"}</h2>
-            <form className="register__form">
+            <form className="register__form" onSubmit={handleSubmit}>
                 {locationSignUp() &&
                     <InputForm
                         name="name"
                         classForm="register__form"
-                        valueDef="Виталий"
+                        value={nameUser} onChange={(event) => { handleChengeForm(event) }}
                         textLabel="Имя"
-                        textSpan="Допускается имя длинной от 2 до 30 символов." />
+                        valid={validationName.isNameError}
+                        // textSpan="Допускается имя длинной от 2 до 30 символов."
+                        textSpan={validationName.messageError} />
                 }
                 <InputForm
                     name="email"
                     classForm="register__form"
-                    valueDef="email"
+                    value={email} onChange={(event) => { setEmail(event.target.value) }}
+
                     textLabel="E-mail"
                     textSpan="Неверный адрес электронной почты." />
                 <InputForm
                     name="password"
                     classForm="register__form"
-                    valueDef="password"
+                    value={password} onChange={(event) => { setPassword(event.target.value) }}
+                    autoComplete="on"
                     textLabel="Пароль"
                     textSpan="Что-то пошло не так..." />
-                <button className="register__but" disabled>{locationSignUp() ? "Зарегистрироваться" : "Войти"}</button>
+                <button className="register__but" disabled={buttonActiv()}>{locationSignUp() ? "Зарегистрироваться" : "Войти"}</button>
             </form>
             <p className="register__text">{`${locationSignUp() ? "Уже" : "Еще не"} зарегистрированы?`}
                 <Link

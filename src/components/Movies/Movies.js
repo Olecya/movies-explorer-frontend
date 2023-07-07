@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
+import './Movies.css';
 import { MovieButtonAdd } from "./MovieButtonAdd/MovieButtonAdd";
 import { MoviesCard } from "./MoviesCard/MoviesCard";
 import { MoviesCardList } from "./MoviesCardList/MoviesCardList";
@@ -6,7 +7,7 @@ import Preloader from "./Preloader/Preloader";
 import { SearchForm } from "./SearchForm/SearchForm";
 import { countFilmList } from "../../utils/constants";
 
-export const Movies = ({ loading, movies = [], location, onSubmit = { onSubmit } }) => {
+export const Movies = ({ loading, movies = [], myMovies=[], location, onSubmit = { onSubmit }, onMovieLike }) => {
 
     const [filmList, setFilmList] = useState(countFilmList);
     const [filtering, setFiltering] = useState(false);
@@ -14,7 +15,12 @@ export const Movies = ({ loading, movies = [], location, onSubmit = { onSubmit }
     const [searchWord, setSearchWord] = useState('');
 
     useEffect(() => {
-        console.log(searchWord);
+        let w = localStorage.getItem('saveSearchWord');
+        w && setSearchWord(w);
+    }, [])
+
+    useEffect(() => {
+        // console.log(searchWord);
         if (searchWord) {
             setFiltering(true);
             if (!movies?.length) onSubmit();
@@ -23,47 +29,52 @@ export const Movies = ({ loading, movies = [], location, onSubmit = { onSubmit }
     }, [searchWord]);
 
     useEffect(() => {
-        console.log(loading, searchWord, movies);
+        // console.log(loading, searchWord, movies);
         searchWord && !loading && filteringMovies(searchWord, movies);
     }, [loading]);
 
+    function savedSearchWord(w) {
+        setSearchWord(w);
+        localStorage.setItem('saveSearchWord', w);
+    }
+
     const filteringMovies = useCallback((w, mov) => {
-        console.log(w, mov[1]);
+        
 
         async function filterItems(query) {
             if (mov?.length) {
                 const m = mov.filter(function (m) {
                     return m.nameEN.toLowerCase().indexOf(query.toLowerCase()) > -1 | m.nameRU.toLowerCase().indexOf(query.toLowerCase()) > -1;
                 });
-                console.log(m);
+                console.log(myMovies);
                 setMoviesResylt(m);
                 setFiltering(false);
             }
         }
         filterItems(w);
-        console.log(w, '   ', moviesResylt);
+        // console.log(w, '   ', moviesResylt);
 
     }, [searchWord, movies]);
 
     return (
         < >
-            <SearchForm onSubmit={(w) => setSearchWord(w)} value={searchWord}
+            <SearchForm onSubmit={(w) => savedSearchWord(w)} value={searchWord}
             // handleSearch={(e) => handleSearch(e)} 
             />
             {filtering ?
                 <Preloader /> :
-                moviesResylt.length>-1 ?
-                <>
-                    <MoviesCardList location={location} >
-                        {
-                            moviesResylt?.slice(0, filmList).map(m => (
-                                <MoviesCard key={m._id || m.id} movie={m} />
-                            ))
-                        }
-                    </MoviesCardList>
-                    {filmList <= moviesResylt.length && <MovieButtonAdd hendleMovieButtonAdd={() => { setFilmList(filmList + countFilmList) }} />}
-                </> :
-                <div>Ничего не найденно</div>
+                moviesResylt.length > 0 ?
+                    <>
+                        <MoviesCardList location={location} >
+                            {
+                                moviesResylt?.slice(0, filmList).map(m => (
+                                    <MoviesCard key={m._id || m.id} movie={m} onMovieLike={onMovieLike} myMovies={myMovies} />
+                                ))
+                            }
+                        </MoviesCardList>
+                        {filmList <= moviesResylt.length && <MovieButtonAdd hendleMovieButtonAdd={() => { setFilmList(filmList + countFilmList) }} />}
+                    </> :
+                    <div className="movie_not-found">Ничего не найденно</div>
             }
         </>
     )

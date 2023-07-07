@@ -8,4 +8,14 @@ export const apiMovieOptions =
     }
 }
 
+export const apiMainOptions =
+{
+    // baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
+    baseUrl: 'http://localhost:3001',
+    headers:
+    {
+        'Content-Type': 'application/json',
+    }
+}
+
 export const countFilmList = 4;
