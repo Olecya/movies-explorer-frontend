@@ -50,19 +50,19 @@ class MainApi {
             director,
             country, } = movie;
 
-        console.log({
-            nameEN,
-            nameRU,
-            movieId: id,
-            thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
-            trailerLink,
-            image: `https://api.nomoreparties.co${image.url}`,
-            description,
-            year,
-            duration,
-            director,
-            country,
-        })
+        // console.log({
+        //     nameEN,
+        //     nameRU,
+        //     movieId: id,
+        //     thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
+        //     trailerLink,
+        //     image: `https://api.nomoreparties.co${image.url}`,
+        //     description,
+        //     year,
+        //     duration,
+        //     director,
+        //     country,
+        // })
         return fetch(`${this._baseUrl}/movies`, {
             method: 'POST',
             headers: this._authHeders(),
@@ -97,7 +97,7 @@ class MainApi {
             method: 'GET',
             headers: this._authHeders(),
         })
-        .then(this._checkResponse);
+            .then(this._checkResponse);
     }
 }
 

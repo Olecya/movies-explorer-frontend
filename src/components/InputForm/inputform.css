@@ -36,6 +36,11 @@
     font-size: 10px;
     line-height: 12px;
     color: #EE3465;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.register__form-input_error-activ {
     visibility: visible;
     opacity: 1;
 }

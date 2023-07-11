@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-// import { useLocation } from 'react-router';
 import Footer from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import { Main } from '../Main/Main';
@@ -30,7 +29,7 @@ function App() {
     const getUser = useCallback(async () => {
         await mainApi.getUsersMe()
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 setCurrentUser(res);
                 setLoggedIn(true);
             })
@@ -60,7 +59,7 @@ function App() {
             checkToken(jwt)
                 .then((r) => {
                     if (r) {
-                        console.log('checkToken')
+                        // console.log('checkToken')
                         setLoggedIn(true);
                     }
                 })
@@ -94,7 +93,8 @@ function App() {
         setLoggedIn(false);
         localStorage.setItem('mail', '');
         localStorage.setItem('jwt', '');
-        localStorage.setItem('saveSearchWord', '')
+        localStorage.setItem('saveSearchWord', '');
+        localStorage.setItem('saveShortFilm', '');
         navigate("/");
     }
     function handleUpdateUser(dataUser) {
@@ -103,9 +103,9 @@ function App() {
             .catch((err) => console.log(err));
     }
     function handleSignUp({ email, password, name }) {
-        console.log(email, password, name)
+        // console.log(email, password, name)
         register(email, password, name)
-            .then((r) => { handleSignIn({ email, password }) })
+            .then(() => { handleSignIn({ email, password }) })
             .catch((err) => console.log(err))
     }
     function handleSignIn({ email, password }) {
@@ -125,19 +125,19 @@ function App() {
     }
 
     function handleMovietoggleLike(movie, metod) {
-        console.log('metod')
+        // console.log('metod')
         if (metod === 'POST') {
-            console.log('post')
+            // console.log('post')
             mainApi.postMovies(movie)
                 .catch((err) => console.log(err))
                 .finally(getMyMovies)
         }
         if (metod === 'DELETE') {
-            console.log(movie._id);
+            // console.log(movie._id);
             mainApi.deleteMoviesId(movie._id)
                 .catch((err) => console.log(err))
                 .finally(getMyMovies);
-            console.log('delete')
+            // console.log('delete')
         } else { return };
     }
 

@@ -27,6 +27,11 @@ export const MoviesCard = ({ movie, onMovieLike, myMovies = [], pathSavedMovies 
     const likeButtonClassName = (
         `moviesCard__like ${isLiked() && 'moviesCard__like_aktiv'}`
     );
+    const durationMovie = () => {
+        const hours = Math.floor(duration / 60);
+        const minutes = duration - hours * 60;
+        return hours ? `${hours}ч ${minutes}м` : `${minutes}мин`;
+    }
 
     const likeButton = (
         <>
@@ -65,7 +70,7 @@ export const MoviesCard = ({ movie, onMovieLike, myMovies = [], pathSavedMovies 
                 {!pathSavedMovies && likeButton}
                 {pathSavedMovies && crestButton}
             </div>
-            <p className="moviesCard__time">1ч42м</p>
+            <p className="moviesCard__time">{durationMovie()}</p>
         </article>
     )
 }

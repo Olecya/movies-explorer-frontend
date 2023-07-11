@@ -4,7 +4,6 @@ import Navigation from '../Navigation/Navigation';
 import './header.css';
 
 export const Header = ({ loggedIn, location }) => {
-    
 
     let showNavigation = () => {
         switch (location.pathname) {

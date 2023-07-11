@@ -19,7 +19,7 @@ export const InputForm = (props) => {
                 maxLength={maxLength}
                 {...rest}
             />
-            <span className={`${classForm}-input_error ${valid && `${classForm}-input_error_active`}`} id={name}>{textSpan}</span>
+            <span className={`${classForm}-input_error ${valid && `${classForm}-input_error-activ`} `} id={name}>{textSpan}</span>
 
         </>
     );

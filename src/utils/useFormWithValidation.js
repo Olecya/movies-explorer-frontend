@@ -1,68 +1,53 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
+export const useInput = (initialValue, validations) => {
+    const [value, setValue] = useState(initialValue);
+    const valid = useFormWithValidation(value, validations);
+    const onChange = (e) => {
+        setValue(e.target.value)
+    }
 
+    return { value, onChange, ...valid }
+}
 
-export const useFormWithValidation = (value, nameInput) => {
-	const inputEmailValidations = { isEmail: true };
-	const inputPasswordValidations = { minLength: 2 };
-	const inputNameValidations = { isName: true };
-	let validations = {};
+export const useFormWithValidation = (value, validations) => {
+    const [minLength, setMinLength] = useState(true);
+    const [maxLength, setMaxLength] = useState(true);
+    const [isNameError, setNameError] = useState(true);
+    const [isMailError, setIsMailError] = useState(false);
+    const [messageError, setMessageError] = useState('');
 
-	validations = nameInput === "email" && inputEmailValidations;
-	validations = nameInput === "password" && inputPasswordValidations;
-	validations = nameInput === "name" && inputNameValidations;
+    useEffect(() => {
+        for (const validation in validations) {
+            switch (validation) {
+                case 'isEmail':
+                    const walidationPattern = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                    if (walidationPattern.test(value)) {
+                        setIsMailError(false)
+                    } else {
+                        setIsMailError(true)
+                    };
+                    setMessageError('Неверная запись E-mail')
+                    break;
+                case 'minLength':
+                    if (String(value).length >= validations[validation]) {
+                        setMinLength(false);
 
-	const [isValid, setIsvalid] = useState(false);
-	const [isMailError, setIsMailError] = useState(false);
-	const [minLengthError, setMinLenghtError] = useState(false);
-	const [isNameError, setIsNameError] = useState(false);
-	const [messageError, setMessage] = useState('');
+                    } else {
+                        setMinLength(true);
+                    }
+                    setMessageError(`Минимальное количесво символов: ${validations[validation]}`)
+                    break;
+                case 'isName':
+                    const walidationPatternWord = /(^[a-zёа-я]{2,}$)/i;
+                    walidationPatternWord.test(value) ? setNameError(false) : setNameError(true);
+                    // console.log(isValid, isNameError)
+                    setMessageError("Введите имя без пробелов, не менее 2 символов")
+                    break;
+            }
+        }
 
-	const validationEmail = (v) => {
-		const walidationPattern = /https?:\/\/(www)?[a-z0-9\-._~:/?#[\]@!$&'()*+,;=]*/i;
-		return walidationPattern.test(v);
-	}
+    }, [value])
 
-	const validationName = (v) => {
-		const walidationPatternWord = /(^[a-zёа-я]{2,}$)/i;
-		const val = walidationPatternWord.test(v)
-
-		console.log(val, '!!!!!!!!!!!!!!');
-		return val;
-	}
-
-	const generalValidation = () => {
-		let m = '';
-		if (isMailError) m = "Неверная запись E-mail";
-		if (minLengthError) m = "Минимальное количесво 2 символа";
-		if (isNameError) m = "Введите имя без пробелов, не менее 2 символов";
-		return m;
-	}
-
-	useEffect(() => {
-		for (const validation in validations) {
-			switch (validation) {
-				case 'isEmail':
-					console.log('isEmail')
-					validationEmail(value) ? setIsMailError(false) : setIsMailError(true);
-					setIsvalid(isMailError);
-					setMessage(generalValidation(isMailError))
-					break;
-				case 'minLength':
-					value.lenght < validations[validation] ? setMinLenghtError(false) : setMinLenghtError(true);
-					setIsvalid(minLengthError);
-					setMessage(generalValidation(minLengthError))
-					break;
-				case 'isName':
-					// console.log(';;;;;;;;;;;;;;')
-					validationName(value) ? setIsNameError(false) : setIsNameError(true);
-					// setIsvalid(isNameError);
-					console.log(isValid, isNameError)
-					setMessage(generalValidation(isNameError))
-					break;
-			}
-		}
-	}, [value, nameInput])
-
-	return { messageError, isNameError };
+    return { minLength, isNameError, isMailError, maxLength, messageError }
 }

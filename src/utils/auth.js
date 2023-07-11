@@ -1,5 +1,5 @@
-// export const BASE_URL = 'https://expressOlecyaMesto.nomoredomains.work';
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://olecyadiploma.nomoredomains.monster';
+// export const BASE_URL = 'http://localhost:3001';
 
 export const register = (email, password, name) => {
     console.log(email, password, name);
