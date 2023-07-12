@@ -1,6 +1,6 @@
 import { apiMovieOptions } from './constants';
 
-class Api {
+class MoviesApi {
     constructor(apiOptions) {
         this._baseUrl = apiOptions.baseUrl;
         this._headers = apiOptions.headers;
@@ -20,14 +20,14 @@ class Api {
             .then(this._checkResponse);
     }
 
-    getMoviesName = (name) => {
-        return fetch(`${this._baseUrl}`, {
-            credentials: 'include',
-        })
-            .then(this._checkResponse);
-    }
+    // getMoviesName = (name) => {
+    //     return fetch(`${this._baseUrl}`, {
+    //         credentials: 'include',
+    //     })
+    //         .then(this._checkResponse);
+    // }
 }
 
-const api = new Api(apiMovieOptions);
+const moviesApi = new MoviesApi(apiMovieOptions);
 
-export default api;
+export default moviesApi;

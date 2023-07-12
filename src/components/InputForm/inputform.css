@@ -40,7 +40,7 @@
     opacity: 0;
 }
 
-.register__form-input_error_active {
+.register__form-input_error-activ {
     visibility: visible;
     opacity: 1;
 }

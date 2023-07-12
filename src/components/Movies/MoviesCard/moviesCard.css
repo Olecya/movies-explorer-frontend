@@ -40,7 +40,7 @@
     margin: 10px 0 0;
     height: 27px;
     width: 27px;
-    background-image: url(../../../images/heard_white.png);
+    background-image: url(../../../images/heard_white.svg);
     /* background-image: url(../../images/card_crest.png); */
     background-color: rgba(49, 49, 49, 1);
     border-radius: 36px;
@@ -57,7 +57,7 @@
     height: 27px;
     width: 27px;
     /* background-image: url(../../../images/heard_white.png); */
-    background-image: url(../../../images/card_crest.png);
+    background-image: url(../../../images/card_crest.svg);
     background-color: rgba(49, 49, 49, 1);
     border-radius: 36px;
     border: none;
@@ -65,7 +65,7 @@
 }
 
 .moviesCard__like_aktiv {
-    background-image: url(../../../images/heard_red.png);
+    background-image: url(../../../images/heard_red.svg);
 }
 
 .moviesCard__like:hover {
@@ -73,7 +73,7 @@
 }
 
 .moviesCard__like_crest {
-    background-image: url(../../../images/card_crest.png);
+    background-image: url(../../../images/card_crest.svg);
 }
 
 .moviesCard__time {
