@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './aboutProject.css';
 import { Title } from "../Title/Title"
 
-
-export const AboutProject = () => {
-
+function AboutProject({ }, myRef) {
     return (
 
-        <section className="aboutProject">
+        <section className="aboutProject" ref={myRef}>
             <Title text={`О проекте`} />
             <div className="aboutProject__container">
                 <div className="aboutProject__container-flex">
@@ -33,6 +31,7 @@ export const AboutProject = () => {
                 </div>
             </div>
         </section>
-
     )
 }
+
+export default forwardRef(AboutProject);

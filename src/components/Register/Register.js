@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useInput } from '../../utils/useFormWithValidation';
 import { InputForm } from '../InputForm/InputForm';
@@ -15,7 +15,9 @@ export const Register = ({ onDataUser, location }) => {
     }
 
     const buttonActiv = () => {
-        return locationSignUp() ? (name.isNameError || email.isMailError || password.minLength) : (email.isMailError || password.minLength);
+        return locationSignUp() ?
+            (name.isNameError || email.isMailError || password.minLength) :
+            (email.isMailError || password.minLength);
     }
 
     function handleSubmit(e) {

@@ -7,15 +7,15 @@ export const SearchForm = ({ onSubmit, filterCheckbox, value, savedMovies }) => 
 
     useEffect(() => {
         if (!savedMovies) {
-            const w = localStorage.getItem('saveSearchWord');
-            const a = localStorage.getItem('saveShortFilm')
-            w && setWord(w);
-            a && setFilterCheckbox(a);
+            const saveSearchWord = localStorage.getItem('saveSearchWord');
+            const saveShortFilm = (localStorage.getItem('saveShortFilm') === 'true');
+            saveSearchWord && setWord(saveSearchWord);
+            saveShortFilm && setFilterCheckbox(saveShortFilm);
         }
     }, [])
 
     const handleChange = useCallback((e) => {
-        const wordPattern = /(^[a-z]{2,}$)|(^[ёа-я]{2,}$)/i;
+        const wordPattern = /(^[a-z]{1,}$)|(^[ёа-я]{1,}$)/i;
         if (wordPattern.test(e.target.value)) {
             setWord(e.target.value);
         } else {
@@ -37,8 +37,18 @@ export const SearchForm = ({ onSubmit, filterCheckbox, value, savedMovies }) => 
         < >
             <section className="searchForm">
                 <form className="searchForm__form">
-                    <input type="text" className="searchForm__input" defaultValue={value} placeholder="Фильм" required onChange={(e) => { handleChange(e) }} />
-                    <button className={`searchForm__but-search ${word && "searchForm__but-search_activ"}`} type="submit" onClick={(e) => handleSubmit(e)} disabled={!Boolean(word)}>Найти</button>
+                    <input type="text"
+                        className="searchForm__input"
+                        defaultValue={value}
+                        placeholder="Фильм"
+                        required onChange={(e) => { handleChange(e) }} />
+                    <button
+                        className={`searchForm__but-search ${word && "searchForm__but-search_activ"}`}
+                        type="submit"
+                        onClick={(e) => handleSubmit(e)}
+                        disabled={!Boolean(word)}>
+                        Найти
+                    </button>
 
                     <span className={`searchForm__input-error ${!Boolean(word) && 'searchForm__input-error_active'}`} >{`Введите слово`}</span>
                 </form>

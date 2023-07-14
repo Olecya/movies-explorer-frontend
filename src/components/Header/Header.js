@@ -11,7 +11,6 @@ export const Header = ({ loggedIn, location }) => {
             case `/sign-up`:
             case `/not-found-page`:
                 return false;
-
             default:
                 return true;
         }

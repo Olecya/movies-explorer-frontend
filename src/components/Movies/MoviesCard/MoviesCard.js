@@ -1,11 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
-import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
+import React, { useState, useEffect } from "react";
 import './moviesCard.css';
 
 export const MoviesCard = ({ movie, onMovieLike, myMovies = [], pathSavedMovies }) => {
 
     const [isHovering, setIsHovering] = useState(false);
-    const { image, nameRU, duration, _id, trailerLink } = movie;
+    const { image, nameRU, duration, } = movie;
 
     const isLiked = () => myMovies.some(i => i.movieId === movie.id);
 
@@ -39,8 +38,7 @@ export const MoviesCard = ({ movie, onMovieLike, myMovies = [], pathSavedMovies 
                 type="button"
                 aria-label="like"
                 onClick={() => {
-                    let mov = myMovies.find(i => i.movieId === movie.id)
-                    console.log(mov);
+                    let mov = myMovies.find(i => i.movieId === movie.id);
                     isLiked() ? onMovieLike(mov, 'DELETE') : onMovieLike(movie, 'POST');
                 }} />
         </>

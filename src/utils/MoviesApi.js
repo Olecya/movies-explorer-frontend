@@ -14,18 +14,10 @@ class MoviesApi {
     }
 
     getMovies = () => {
-        return fetch(`${this._baseUrl}`, {
-            // credentials: 'include',
-        })
+        return fetch(`${this._baseUrl}`, {})
             .then(this._checkResponse);
     }
 
-    // getMoviesName = (name) => {
-    //     return fetch(`${this._baseUrl}`, {
-    //         credentials: 'include',
-    //     })
-    //         .then(this._checkResponse);
-    // }
 }
 
 const moviesApi = new MoviesApi(apiMovieOptions);

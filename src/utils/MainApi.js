@@ -92,7 +92,6 @@ class MainApi {
     }
 
     getMovies = async () => {
-        // console.log(localStorage.getItem('jwt'));
         return fetch(`${this._baseUrl}/movies`, {
             method: 'GET',
             headers: this._authHeders(),

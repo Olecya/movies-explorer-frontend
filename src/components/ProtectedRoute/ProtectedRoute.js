@@ -1,10 +1,11 @@
 import React from 'react';
 import { Navigate } from "react-router-dom";
 
-const ProtectedRouteElement = ({ element, ...props  }) => {
+const ProtectedRouteElement = ({ element }) => {
 
-  return (
-    props.loggedIn ? <>{element}</>  : <Navigate to="/" replace/>
-)}
+    return (
+        localStorage.getItem('loggedIn') === "true" ? <>{element}</> : <Navigate to="/" replace />
+    )
+}
 
 export default ProtectedRouteElement;

@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useInput } from '../../utils/useFormWithValidation';
 
-export const Profile = ({ userOut, onUpdateUser }) => {
+export const Profile = ({ userOut, updateUser }) => {
 
     const [currentUser] = useContext(CurrentUserContext);
     const email = useInput(currentUser.email, { isEmail: true })
@@ -11,10 +11,16 @@ export const Profile = ({ userOut, onUpdateUser }) => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        onUpdateUser({
-            name: name,
-            email: email
+        updateUser({
+            name: name.value,
+            email: email.value
         });
+    }
+
+    function disabledProfileEdit() {
+        if (name.isNameError || email.isMailError) return true;
+        if (name.value === currentUser.name && email.value === currentUser.email) { return true };
+        return false;
     }
 
     return (
@@ -32,7 +38,11 @@ export const Profile = ({ userOut, onUpdateUser }) => {
                     <span className={`profile__form-input_error ${email.isMailError && `profile__form-input_error-activ`} `} id={name}>{email.messageError}</span>
                 </form>
                 <div className="profile__but-box">
-                    <button className="profile__but-edit" disabled={name.isNameError || email.isMailError}>Редактиовать</button>
+                    <button className="profile__but-edit"
+                        onClick={e => handleSubmit(e)}
+                        disabled={disabledProfileEdit()}
+                        style={disabledProfileEdit() ? { color: '#a09d9d' } : { color: '#FFFFFF' }}
+                    >Редактиовать</button>
                     <button className="profile__but-exit" onClick={userOut}>Выйти из аккаунта</button>
                 </div>
             </section>

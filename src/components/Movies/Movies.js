@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useContext } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import './Movies.css';
 import { MovieButtonAdd } from "./MovieButtonAdd/MovieButtonAdd";
 import { MoviesCard } from "./MoviesCard/MoviesCard";
@@ -7,7 +7,7 @@ import Preloader from "./Preloader/Preloader";
 import { SearchForm } from "./SearchForm/SearchForm";
 import { countFilmList } from "../../utils/constants";
 
-export const Movies = ({ loading, movies = [], myMovies = [], location, onSubmit = { onSubmit }, onMovieLike }) => {
+export const Movies = ({ loading, movies = [], myMovies = [], location, onSubmit, onMovieLike }) => {
 
     const [width, setWidth] = useState(window.innerWidth);
     const [filmList, setFilmList] = useState(5);
@@ -41,14 +41,13 @@ export const Movies = ({ loading, movies = [], myMovies = [], location, onSubmit
     }, [width]);
 
     useEffect(() => {
-        const w = localStorage.getItem('saveSearchWord');
-        const a = localStorage.getItem('saveShortFilm')
-        w && setSearchWord(w);
-        a && setShortFilm(a);
+        const saveShortFilm = (localStorage.getItem('saveShortFilm') === 'true');
+        const word = localStorage.getItem('saveSearchWord');
+        word && setSearchWord(word);
+        saveShortFilm && setShortFilm(saveShortFilm);
     }, [])
 
     useEffect(() => {
-        // console.log(searchWord);
         if (searchWord) {
             setFiltering(true);
             if (!movies?.length) onSubmit();
@@ -57,21 +56,20 @@ export const Movies = ({ loading, movies = [], myMovies = [], location, onSubmit
     }, [searchWord]);
 
     useEffect(() => {
-        // console.log(loading, searchWord, movies);
         searchWord && !loading && filteringMovies(searchWord, movies);
     }, [loading, shortFilm]);
 
-    function savedSearchWord(w) {
-        setSearchWord(w);
-        localStorage.setItem('saveSearchWord', w);
+    function savedSearchWord(word) {
+        setSearchWord(word);
+        localStorage.setItem('saveSearchWord', word);
     }
-    function savedShortFilm(a) {
-        setShortFilm(a);
-        localStorage.setItem('saveShortFilm', a);
+    function savedShortFilm(stateShortFilm) {
+        setShortFilm(stateShortFilm);
+        localStorage.setItem('saveShortFilm', stateShortFilm);
     }
 
-    const shortFilmFiltering = (mov) => {
-        const shortMovie = mov.filter(function (m) {
+    const shortFilmFiltering = (movieCard) => {
+        const shortMovie = movieCard.filter(function (m) {
             return m.duration < 41;
         })
         return (shortMovie);
@@ -79,7 +77,6 @@ export const Movies = ({ loading, movies = [], myMovies = [], location, onSubmit
 
     const filteringMovies = useCallback((w, mov) => {
         async function filterItems(query, shortFilm) {
-
             if (mov?.length) {
                 const m = mov.filter(function (m) {
                     return m.nameEN.toLowerCase().indexOf(query.toLowerCase()) > -1 | m.nameRU.toLowerCase().indexOf(query.toLowerCase()) > -1;

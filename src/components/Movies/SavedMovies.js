@@ -4,7 +4,7 @@ import { MoviesCard } from "./MoviesCard/MoviesCard";
 import { MoviesCardList } from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 import { SearchForm } from "./SearchForm/SearchForm";
-export const SavedMovies = ({ loading, location, onSubmit, myMovies = [], onMovieLike }) => {
+export const SavedMovies = ({ loading, location, myMovies = [], onMovieLike }) => {
 
     const [searchWord, setSearchWord] = useState('');
     const [shortFilm, setShortFilm] = useState(false);
@@ -15,7 +15,7 @@ export const SavedMovies = ({ loading, location, onSubmit, myMovies = [], onMovi
     }, [myMovies])
 
     useEffect(() => {
-        filteringMovies(searchWord, myMovies);
+        filteringMovies();
     }, [shortFilm, searchWord]);
 
     const shortFilmFiltering = (mov) => {
@@ -24,11 +24,11 @@ export const SavedMovies = ({ loading, location, onSubmit, myMovies = [], onMovi
         })
         return (shortMovie);
     }
-    const filteringMovies = useCallback((w, mov) => {
+    const filteringMovies = useCallback(() => {
         async function filterItems(query, shortFilm) {
 
-            if (mov?.length) {
-                const m = mov.filter(function (m) {
+            if (myMovies?.length) {
+                const m = myMovies.filter(function (m) {
                     return m.nameEN.toLowerCase().indexOf(query.toLowerCase()) > -1 | m.nameRU.toLowerCase().indexOf(query.toLowerCase()) > -1;
                 });
                 if (shortFilm) {
@@ -38,7 +38,7 @@ export const SavedMovies = ({ loading, location, onSubmit, myMovies = [], onMovi
                 setMoviesResylt(m);
             }
         }
-        filterItems(w, shortFilm);
+        filterItems(searchWord, shortFilm);
     }, [searchWord, myMovies, shortFilm]);
 
     function savedSearchWord(w) {
