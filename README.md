@@ -2,6 +2,8 @@
 
 Адрес репозитория Frontend: https://github.com/Olecya/movies-explorer-frontend
 Макет дипломного проекта: https://disk.yandex.ru/d/Ckbg0tUsuiX1eA
+Деплой проэкта https://olecyadiplomafront.nomoredomains.monster/
+Пулл-реквест https://github.com/Olecya/movies-explorer-frontend/pull/4
 
 ## Ссылки на проект
 
