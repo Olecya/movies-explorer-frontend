@@ -30,12 +30,11 @@ function App() {
     const navigate = useNavigate();
 
     const getUser = useCallback(async () => {
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!')
         await mainApi.getUsersMe()
             .then((res) => {
-                if (res.ok) {
-                    setCurrentUser(res);
-                    setLoggedIn(true);
-                }
+                setCurrentUser(res);
+                setLoggedIn(true);
             })
             .catch((err) => console.log(err))
     }, []);
@@ -117,12 +116,10 @@ function App() {
         // console.log(email, password, name)
         register(email, password, name)
             .then((res) => {
-                console.log(res)
                 if (res.ok) {
                     handleSignIn({ email, password });
                     return
                 }
-                console.log('!!!!!!!!!!!!')
                 setIsInfoTooltipOpenIsOk(false);
                 setIsInfoTooltipOpen(true);
 
@@ -131,8 +128,9 @@ function App() {
     }
     function handleSignIn({ email, password }) {
         authorize(password, email)
+            .then(res => res.json())
             .then((data) => {
-                // console.log(data.token);
+                // console.log(data);
                 if (data.token) {
                     setLoggedIn(true);
                     localStorage.setItem('mail', email);

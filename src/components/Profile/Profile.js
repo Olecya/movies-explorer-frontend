@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useInput } from '../../utils/useFormWithValidation';
