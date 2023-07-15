@@ -1,13 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useInput } from '../../utils/useFormWithValidation';
 import { InputForm } from '../InputForm/InputForm';
 import NavigationLogo from '../NavigationLogo/NavigationLogo';
 import './register.css';
 
-export const Register = ({location}) => {    
+export const Register = ({ onDataUser, location }) => {
+    const name = useInput('', { isName: true });
+    const email = useInput('', { isEmail: true });
+    const password = useInput('', { minLength: 2 })
 
     const locationSignUp = () => {
         return location.pathname === `/sign-up`;
+    }
+
+    const buttonActiv = () => {
+        return locationSignUp() ?
+            (name.isNameError || email.isMailError || password.minLength) :
+            (email.isMailError || password.minLength);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        onDataUser({
+            password: password.value,
+            email: email.value,
+            name: name.value
+        });
     }
 
     return (
@@ -16,28 +35,38 @@ export const Register = ({location}) => {
                 <NavigationLogo />
             </div>
             <h2 className="register__title">{locationSignUp() ? "Добро пожаловать!" : "Рады видеть!"}</h2>
-            <form className="register__form">
+            <form className="register__form" onSubmit={handleSubmit}>
                 {locationSignUp() &&
                     <InputForm
                         name="name"
                         classForm="register__form"
-                        valueDef="Виталий"
                         textLabel="Имя"
-                        textSpan="Допускается имя длинной от 2 до 30 символов." />
+                        value={name.value}
+                        onChange={(e) => name.onChange(e)}
+                        valid={name.isNameError}
+                        textSpan={name.messageError}
+                    />
                 }
                 <InputForm
                     name="email"
                     classForm="register__form"
-                    valueDef="email"
                     textLabel="E-mail"
-                    textSpan="Неверный адрес электронной почты." />
+                    value={email.value}
+                    onChange={(e) => email.onChange(e)}
+                    valid={email.isMailError}
+                    textSpan={email.messageError}
+                />
                 <InputForm
                     name="password"
                     classForm="register__form"
-                    valueDef="password"
+                    autoComplete="on"
                     textLabel="Пароль"
-                    textSpan="Что-то пошло не так..." />
-                <button className="register__but" disabled>{locationSignUp() ? "Зарегистрироваться" : "Войти"}</button>
+                    value={password.value}
+                    onChange={(e) => password.onChange(e)}
+                    valid={password.minLength}
+                    textSpan={password.messageError}
+                />
+                <button className="register__but" disabled={buttonActiv()}>{locationSignUp() ? "Зарегистрироваться" : "Войти"}</button>
             </form>
             <p className="register__text">{`${locationSignUp() ? "Уже" : "Еще не"} зарегистрированы?`}
                 <Link

@@ -4,7 +4,6 @@ import Navigation from '../Navigation/Navigation';
 import './header.css';
 
 export const Header = ({ loggedIn, location }) => {
-    
 
     let showNavigation = () => {
         switch (location.pathname) {
@@ -12,7 +11,6 @@ export const Header = ({ loggedIn, location }) => {
             case `/sign-up`:
             case `/not-found-page`:
                 return false;
-
             default:
                 return true;
         }

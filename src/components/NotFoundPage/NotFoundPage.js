@@ -1,11 +1,9 @@
 import React from 'react';
-// import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import './NotFoundPage.css';
 
 export const NotFoundPage = () => {
     const navigate = useNavigate();
-    // let location = useLocation();
 
     return (
         <section className="not-found">

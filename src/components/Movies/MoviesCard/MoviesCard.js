@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './moviesCard.css';
 
-export const MoviesCard = ({ movie, onMovieLike, myMovie, savedMovies }) => {
+export const MoviesCard = ({ movie, onMovieLike, myMovies = [], pathSavedMovies }) => {
 
-    const [liked, setLiked] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
-    const { image, nameRU, duration, _id, trailerLink } = movie;
-    // const isLiked = () => { // сравнивать по айди?
-    //     // const isLiked = myMovie.some(i => i._id === movie._id);    
-    //     return liked;
-    // };
+    const { image, nameRU, duration, } = movie;
+
+    const isLiked = () => myMovies.some(i => i.movieId === movie.id);
+
+    useEffect(() => {
+        isLiked()
+    }, [myMovies])
 
     const handleMouseOver = () => {
         setIsHovering(true);
@@ -18,19 +19,29 @@ export const MoviesCard = ({ movie, onMovieLike, myMovie, savedMovies }) => {
     const handleMouseOut = () => {
         setIsHovering(false);
     };
+    const handleClickMovie = () => {
+        window.open(movie.trailerLink, '_blank');
+    }
 
     const likeButtonClassName = (
-        `moviesCard__like ${liked && 'moviesCard__like_aktiv'}`
+        `moviesCard__like ${isLiked() && 'moviesCard__like_aktiv'}`
     );
+    const durationMovie = () => {
+        const hours = Math.floor(duration / 60);
+        const minutes = duration - hours * 60;
+        return hours ? `${hours}ч ${minutes}м` : `${minutes}мин`;
+    }
 
     const likeButton = (
-        <button className={likeButtonClassName}
-            type="button"
-            aria-label="like"
-            onClick={() => {
-                // onMovieLike(movie, isLiked ? 'DELETE' : 'PUT');
-                setLiked(!liked);
-            }} />
+        <>
+            <button className={likeButtonClassName}
+                type="button"
+                aria-label="like"
+                onClick={() => {
+                    let mov = myMovies.find(i => i.movieId === movie.id);
+                    isLiked() ? onMovieLike(mov, 'DELETE') : onMovieLike(movie, 'POST');
+                }} />
+        </>
     );
 
     const crestButton = (
@@ -40,8 +51,7 @@ export const MoviesCard = ({ movie, onMovieLike, myMovie, savedMovies }) => {
                     type="button"
                     aria-label="cres"
                     onClick={() => {
-                        // onMovieLike(movie, isLiked ? 'DELETE' : 'PUT');
-                        setLiked(!liked);
+                        onMovieLike(movie, 'DELETE');
                     }} />
             )}
         </>
@@ -50,15 +60,15 @@ export const MoviesCard = ({ movie, onMovieLike, myMovie, savedMovies }) => {
     return (
         <article className="moviesCard" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
             <img className="moviesCard__image"
-                // src={'https://avatars.mds.yandex.net/i?id=7729b3b91c0efaadb47d6914f0641433-5663462-images-thumbs&n=13'}
-                src={`https://api.nomoreparties.co${image.url}`}
-                alt={nameRU} />
+                src={image.url ? `https://api.nomoreparties.co${image.url}` : image}
+                alt={nameRU}
+                onClick={handleClickMovie} />
             <div className="moviesCard__info">
                 <h2 className="moviesCard__title">{nameRU}</h2>
-                {!savedMovies && likeButton}
-                {savedMovies && crestButton}
+                {!pathSavedMovies && likeButton}
+                {pathSavedMovies && crestButton}
             </div>
-            <p className="moviesCard__time">1ч42м</p>
+            <p className="moviesCard__time">{durationMovie()}</p>
         </article>
     )
 }
