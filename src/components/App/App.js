@@ -30,7 +30,6 @@ function App() {
     const navigate = useNavigate();
 
     const getUser = useCallback(async () => {
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!')
         await mainApi.getUsersMe()
             .then((res) => {
                 setCurrentUser(res);
@@ -149,19 +148,28 @@ function App() {
             })
             .catch((err) => console.log(err))
     }
+    useEffect(() => { console.log(myMovies) }, [myMovies]);
 
     function handleMovietoggleLike(movie, metod) {
-        // console.log('metod')
         if (metod === 'POST') {
             mainApi.postMovies(movie)
+                .then((r) => {
+                    setMyMovies(myMovies => [...myMovies, r]);
+                })
                 .catch((err) => console.log(err))
-                .finally(getMyMovies)
+                .finally(() => {
+                    return
+                })
         }
         if (metod === 'DELETE') {
             mainApi.deleteMoviesId(movie._id)
+                .then((r) => {
+                    const newMyMovies = myMovies.filter(m => m._id !== movie._id);
+                    setMyMovies(newMyMovies);
+                })
                 .catch((err) => console.log(err))
-                .finally(getMyMovies);
-        } else { return };
+        }
+        return;
     }
 
     function closeInfoTooltip() {
